@@ -9,6 +9,7 @@ app = Flask(__name__)
 app.secret_key = os.urandom(24)  # Required for flashing messages
 DB_PATH = 'records.db'
 UNBOUND_CONFIG_PATH = '/etc/unbound/unbound.conf.d/local-data.conf'
+BASE_DOMAIN = 'avexys.com'
 
 def restart_unbound():
     """Safely restart the unbound service using systemctl."""
@@ -90,7 +91,7 @@ def generate_unbound_config():
 
         config_lines = []
         config_lines.append('server:')
-        config_lines.append('\tlocal-zone: "avexys.com." transparent')
+        config_lines.append('\tlocal-zone: "{BASE_DOMAIN}." transparent')
         for domain, record_type, value, ttl, resolved_ip in records:
             if record_type == 'A':
                 config_lines.append(f'\tlocal-data: "{domain} {ttl} IN A {value}"')
