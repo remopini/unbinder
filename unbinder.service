@@ -1,0 +1,17 @@
+[Unit]
+Description=Unbound Local Data Editor (Unbinder)
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/root/unbinder
+# ExecStart runs the Python app. Adjust the path to python3 if necessary.
+ExecStart=/usr/bin/python3 /root/unbinder/app.py
+# Run as an explicit user if desired (uncomment and set a dedicated user):
+# User=unbinder
+Restart=on-failure
+RestartSec=5
+Environment=FLASK_ENV=production
+
+[Install]
+WantedBy=multi-user.target
