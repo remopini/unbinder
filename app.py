@@ -91,7 +91,7 @@ def generate_unbound_config():
 
         config_lines = []
         config_lines.append('server:')
-        config_lines.append('\tlocal-zone: "{BASE_DOMAIN}." transparent')
+        config_lines.append(f'\tlocal-zone: "{BASE_DOMAIN}." transparent')
         for domain, record_type, value, ttl, resolved_ip in records:
             if record_type == 'A':
                 config_lines.append(f'\tlocal-data: "{domain} {ttl} IN A {value}"')
